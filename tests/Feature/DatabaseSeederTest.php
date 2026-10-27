@@ -32,7 +32,7 @@ test('the menu seed is idempotent and stores the configured hierarchy', function
     app(MenuSeeder::class)->run();
     app(MenuSeeder::class)->run();
 
-    $this->assertDatabaseCount('menus', 16);
+    $this->assertDatabaseCount('menus', 18);
     $this->assertDatabaseHas('menus', [
         'name' => 'Administración',
         'slug' => 'administracion',

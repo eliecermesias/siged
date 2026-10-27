@@ -104,6 +104,8 @@ class MenuSeeder extends Seeder
             ]],
             ['name' => 'Administración', 'icon' => 'cog-6-tooth', 'url' => '#', 'slug' => 'administracion', 'current' => '', 'priority' => 6, 'roles' => $admin, 'children' => [
                 ['name' => 'Usuarios', 'icon' => 'users', 'url' => '/usuarios', 'slug' => 'usuarios', 'current' => '', 'priority' => 1, 'roles' => $admin],
+                ['name' => 'Personas', 'icon' => 'user-circle', 'url' => 'route:people.index', 'slug' => 'personas', 'current' => 'people.*', 'priority' => 2, 'roles' => $admin],
+                ['name' => 'Roles', 'icon' => 'shield-check', 'url' => '/roles', 'slug' => 'roles', 'current' => '', 'priority' => 3, 'roles' => $admin],
                 ['name' => 'Periodos', 'icon' => 'calendar-days', 'url' => '/periodos', 'slug' => 'periodos', 'current' => '', 'priority' => 2, 'roles' => $admin],
                 ['name' => 'Preguntas', 'icon' => 'question-mark-circle', 'url' => '/preguntas', 'slug' => 'preguntas', 'current' => '', 'priority' => 3, 'roles' => $admin],
             ]],
