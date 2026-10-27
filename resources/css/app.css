@@ -1,0 +1,83 @@
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-unicuces-blue: #003366;
+    --color-unicuces-blue-dark: #002244;
+    --color-unicuces-blue-50: #eef6ff;
+    --color-unicuces-blue-100: #d9eaff;
+    --color-unicuces-blue-200: #b9d8f8;
+    --color-unicuces-blue-300: #8bbfe8;
+    --color-unicuces-blue-400: #5c9ed4;
+    --color-unicuces-blue-500: #2879b5;
+    --color-unicuces-blue-600: #075c9b;
+    --color-unicuces-blue-700: #004a82;
+    --color-unicuces-blue-800: #003866;
+    --color-unicuces-blue-900: #002b52;
+    --color-unicuces-gold: #ffcc00;
+    --color-unicuces-gold-dark: #e6b800;
+    --color-unicuces-gold-soft: #fff7cc;
+    --color-unicuces-navy: var(--color-unicuces-blue);
+
+    --color-zinc-50: #f8fafc;
+    --color-zinc-100: #f1f5f9;
+    --color-zinc-200: #e2e8f0;
+    --color-zinc-300: #cbd5e1;
+    --color-zinc-400: #94a3b8;
+    --color-zinc-500: #64748b;
+    --color-zinc-600: #475569;
+    --color-zinc-700: #334155;
+    --color-zinc-800: #1e293b;
+    --color-zinc-900: #0f172a;
+    --color-zinc-950: #020617;
+
+    --color-accent: var(--color-unicuces-blue-600);
+    --color-accent-content: var(--color-unicuces-blue-700);
+    --color-accent-foreground: var(--color-white);
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-unicuces-blue-500);
+        --color-accent-content: var(--color-unicuces-blue-300);
+        --color-accent-foreground: var(--color-white);
+    }
+}
+
+@layer base {
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+[data-flux-field]:not(ui-radio, ui-checkbox) {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply  !mb-0 !leading-tight;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
+}
+
+/* \[:where(&)\]:size-4 {
+    @apply size-4;
+} */
