@@ -14,7 +14,7 @@ class PeopleSeeder extends Seeder
             return;
         }
 
-        $peopleToCreate = 40 - People::query()->count();
+        $peopleToCreate = 60 - People::query()->count();
 
         if ($peopleToCreate <= 0) {
             return;

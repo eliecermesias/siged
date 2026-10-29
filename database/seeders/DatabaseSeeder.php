@@ -19,6 +19,17 @@ class DatabaseSeeder extends Seeder
             MenuSeeder::class,
             DocumentTypesSeeder::class,
             PeopleSeeder::class,
+            TeachersSeeder::class,
+            StudentsSeeder::class,
+            CoordinatorsSeeder::class,
+            EducationLevelSeeder::class,
+            KnowledgeAreaSeeder::class,
+            AcademicProgramsSeeder::class,
+            PeriodsSeeder::class,
+            IntentionsSeeder::class,
+            EvaluationModalitiesSeeder::class,
+            EvaluationInstrumentsSeeder::class,
+            InstrumentVersionsSeeder::class,
         ]);
     }
 }

@@ -7,21 +7,44 @@ use App\Http\Requests\UpdatePeopleRequest;
 use App\Models\DocumentTypes;
 use App\Models\People;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class PeopleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
+        $validated = $request->validate([
+            'search' => ['nullable', 'string', 'max:255'],
+        ]);
+        $search = trim($validated['search'] ?? '');
+
+        $people = People::query()
+            ->with([
+                'documentType:id,name',
+                'teacher:id,person_id',
+                'student:id,person_id',
+                'coordinator:id,person_id',
+            ])
+            ->when($search !== '', function (Builder $query) use ($search): void {
+                $query->whereAny(
+                    ['first_name', 'last_name', 'document', 'email', 'phone'],
+                    'like',
+                    "%{$search}%",
+                );
+            })
+            ->orderBy('last_name')
+            ->orderBy('first_name')
+            ->paginate(15)
+            ->withQueryString();
+
         return view('people.index', [
-            'people' => People::query()
-                ->with('documentType:id,name')
-                ->orderBy('last_name')
-                ->orderBy('first_name')
-                ->paginate(15),
+            'people' => $people,
+            'search' => $search,
         ]);
     }
 

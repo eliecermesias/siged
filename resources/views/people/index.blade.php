@@ -24,6 +24,21 @@
                     <p class="text-sm font-medium text-slate-500 dark:text-slate-300">{{ $people->total() }} registros</p>
                 </div>
                 <flux:subheading>Nombre, identificación y datos de contacto registrados.</flux:subheading>
+
+                <form method="GET" action="{{ route('people.index', ['current_team' => request()->route('current_team')]) }}" class="mt-5 flex flex-col gap-3 sm:flex-row">
+                    <flux:input
+                        name="search"
+                        type="search"
+                        icon="magnifying-glass"
+                        placeholder="Buscar por nombre, identificación o contacto"
+                        aria-label="Buscar personas"
+                        maxlength="255"
+                        :value="$search"
+                        class="sm:flex-1"
+                    />
+                    <flux:button type="submit" variant="primary" icon="magnifying-glass">Buscar</flux:button>
+                </form>
+                <flux:error name="search" />
             </div>
 
             @if ($people->isEmpty())
@@ -31,14 +46,15 @@
                     <div class="mx-auto flex size-16 items-center justify-center rounded-3xl bg-unicuces-blue-100 text-unicuces-blue-700 dark:bg-unicuces-blue-300/15 dark:text-unicuces-blue-100">
                         <flux:icon name="users" class="size-8" />
                     </div>
-                    <flux:heading size="lg" class="mt-5">No hay personas registradas</flux:heading>
-                    <flux:subheading class="mx-auto mt-2 max-w-xl">Los registros de personas aparecerán aquí cuando se creen en el sistema.</flux:subheading>
+                    <flux:heading size="lg" class="mt-5">{{ $search === '' ? 'No hay personas registradas' : 'No se encontraron personas' }}</flux:heading>
+                    <flux:subheading class="mx-auto mt-2 max-w-xl">{{ $search === '' ? 'Los registros de personas aparecerán aquí cuando se creen en el sistema.' : 'Prueba con otro nombre, identificación o dato de contacto.' }}</flux:subheading>
                 </div>
             @else
                 <div class="px-4 pb-5 pt-3 sm:px-6 sm:pb-6 sm:pt-4 lg:px-8">
-                    <flux:table :paginate="$people" container:class="overflow-x-auto">
+                    <flux:table container:class="overflow-x-auto">
                         <flux:table.columns class="bg-slate-50/90 dark:bg-unicuces-blue/35">
                             <flux:table.column>Persona</flux:table.column>
+                            <flux:table.column>Tipo</flux:table.column>
                             <flux:table.column>Documento</flux:table.column>
                             <flux:table.column>Contacto</flux:table.column>
                             
@@ -50,7 +66,18 @@
                                 <flux:table.row :key="$person->id">
                                     <flux:table.cell class="py-5">
                                         <p class="font-semibold text-slate-900 dark:text-white">{{ $person->first_name }} {{ $person->last_name }}</p>
-                                        <p class="mt-1 text-xs text-slate-500 dark:text-slate-300">Registro #{{ $person->id }}</p>
+                                    </flux:table.cell>
+                                    <flux:table.cell class="py-5">
+                                        @php
+                                            $roleColor = match ($person->roleLabel()) {
+                                                'Docente' => 'blue',
+                                                'Estudiante' => 'green',
+                                                'Administrativo' => 'violet',
+                                                'Múltiples' => 'amber',
+                                                default => 'zinc',
+                                            };
+                                        @endphp
+                                        <flux:badge :color="$roleColor">{{ $person->roleLabel() }}</flux:badge>
                                     </flux:table.cell>
                                     <flux:table.cell class="py-5">
                                         <p class="font-medium text-slate-800 dark:text-slate-100">{{ $person->documentType?->name ?? 'Sin tipo' }}</p>
@@ -78,6 +105,12 @@
                             @endforeach
                         </flux:table.rows>
                     </flux:table>
+
+                    @if ($people->hasPages())
+                        <div class="border-t border-slate-200 pt-5 dark:border-unicuces-blue-300/20">
+                            {{ $people->links() }}
+                        </div>
+                    @endif
                 </div>
             @endif
         </div>

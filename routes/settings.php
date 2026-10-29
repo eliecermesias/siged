@@ -12,6 +12,9 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::livewire('settings/appearance', 'pages::settings.appearance')->name('appearance.edit');
+    Route::livewire('settings/question-bank/{current_team}', 'pages::settings.question-bank')
+        ->middleware(EnsureTeamMembership::class)
+        ->name('settings.question-bank');
 
     Route::livewire('settings/security', 'pages::settings.security')
         ->middleware(

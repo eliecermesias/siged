@@ -103,12 +103,17 @@ class MenuSeeder extends Seeder
                 ['name' => 'Exportar Excel', 'icon' => 'table-cells', 'url' => '/reportes/excel', 'slug' => 'reportes-excel', 'current' => '', 'priority' => 2, 'roles' => $adminCoordinator],
             ]],
             ['name' => 'Administración', 'icon' => 'cog-6-tooth', 'url' => '#', 'slug' => 'administracion', 'current' => '', 'priority' => 6, 'roles' => $admin, 'children' => [
-                ['name' => 'Usuarios', 'icon' => 'users', 'url' => '/usuarios', 'slug' => 'usuarios', 'current' => '', 'priority' => 1, 'roles' => $admin],
-                ['name' => 'Personas', 'icon' => 'user-circle', 'url' => 'route:people.index', 'slug' => 'personas', 'current' => 'people.*', 'priority' => 2, 'roles' => $admin],
-                ['name' => 'Roles', 'icon' => 'shield-check', 'url' => '/roles', 'slug' => 'roles', 'current' => '', 'priority' => 3, 'roles' => $admin],
-                ['name' => 'Periodos', 'icon' => 'calendar-days', 'url' => '/periodos', 'slug' => 'periodos', 'current' => '', 'priority' => 2, 'roles' => $admin],
-                ['name' => 'Preguntas', 'icon' => 'question-mark-circle', 'url' => '/preguntas', 'slug' => 'preguntas', 'current' => '', 'priority' => 3, 'roles' => $admin],
+                ['name' => 'Personas', 'icon' => 'user-circle', 'url' => 'route:people.index', 'slug' => 'personas', 'current' => 'people.*', 'priority' => 1, 'roles' => $admin],
+                ['name' => 'Docentes', 'icon' => 'academic-cap', 'url' => 'route:teachers.index', 'slug' => 'docentes', 'current' => 'teachers.*', 'priority' => 2, 'roles' => $admin],
+                ['name' => 'Estudiantes', 'icon' => 'academic-cap', 'url' => 'route:students.index', 'slug' => 'estudiantes', 'current' => 'students.*', 'priority' => 3, 'roles' => $admin],
+                ['name' => 'Coordinadores', 'icon' => 'user-group', 'url' => 'route:coordinators.index', 'slug' => 'coordinadores', 'current' => 'coordinators.*', 'priority' => 4, 'roles' => $admin],
+                ['name' => 'Programas académicos', 'icon' => 'academic-cap', 'url' => 'route:academic-programs.index', 'slug' => 'programas-academicos', 'current' => 'academic-programs.*', 'priority' => 5, 'roles' => $admin],
+                ['name' => 'Niveles de formación', 'icon' => 'bars-3-bottom-left', 'url' => 'route:education-levels.index', 'slug' => 'niveles-formacion', 'current' => 'education-levels.*', 'priority' => 6, 'roles' => $admin],
+                ['name' => 'Áreas del conocimiento', 'icon' => 'rectangle-group', 'url' => 'route:knowledge-areas.index', 'slug' => 'areas-conocimiento', 'current' => 'knowledge-areas.*', 'priority' => 7, 'roles' => $admin],
+                ['name' => 'Periodos', 'icon' => 'calendar-days', 'url' => 'route:periods.index', 'slug' => 'periodos', 'current' => 'periods.*', 'priority' => 8, 'roles' => $admin],
+                ['name' => 'Cursos', 'icon' => 'book-open', 'url' => '#', 'slug' => 'cursos', 'current' => '', 'priority' => 9, 'roles' => $admin],
             ]],
+            ['name' => 'Preguntas', 'icon' => 'question-mark-circle', 'url' => 'route:questions.index', 'slug' => 'preguntas', 'current' => 'questions.*', 'priority' => 7, 'roles' => $admin],
         ];
     }
 }

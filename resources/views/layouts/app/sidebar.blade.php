@@ -20,7 +20,9 @@
 
                     $routeName = str($url)->after('route:')->toString();
 
-                    return Route::has($routeName) ? route($routeName) : '#';
+                    return Route::has($routeName)
+                        ? route($routeName, ['current_team' => request()->route('current_team')])
+                        : '#';
                 };
             @endphp
 
